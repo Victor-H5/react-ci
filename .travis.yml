@@ -1,6 +1,11 @@
 language: node_js
 node_js:
     - "10"
+services:
+    - docker
+
 script:
     - npm run test
-    
+    - docker build -t weitengfei/frontend:latest .
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - docker push weitengfei/frontend:latest

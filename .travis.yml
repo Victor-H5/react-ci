@@ -18,16 +18,12 @@ jobs:
           script: 
             - npm run test
 
-        - name: 'just test'
-          script:
-            - npm info vue
-
         - stage: build and push
           name: 'docker build'
           script:
-            - docker build -t weitengfei/frontend:latest .
+            - docker build -t weitengfei/react-ci:latest .
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-            - docker push weitengfei/frontend:latest
+            - docker push weitengfei/react-ci:latest
 
         - name: 'deploy'
           script: npm run build

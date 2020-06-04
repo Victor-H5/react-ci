@@ -2,6 +2,7 @@ language: node_js
 
 node_js:
     - "10"
+    
 services:
     - docker
 
@@ -14,17 +15,17 @@ stages:
 
 jobs: 
     include:
-        -stage: test
+        - stage: test
          name: 'unit test'
          script: 
             - npm run test
 
-        -stage: build
+        - stage: build
          name: 'docker build'
          script:
             - docker build -t weitengfei/frontend:latest .
         
-        -stage: push
+        - stage: push
          name: 'docker push'
          script:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"

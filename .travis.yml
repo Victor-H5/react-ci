@@ -39,4 +39,4 @@ notifications:
         on_success: change
         on_failure: always
 
-    webhook:
+    webhook: http://118.89.225.49:7777

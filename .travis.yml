@@ -15,18 +15,18 @@ jobs:
     include:
         - stage: test
           name: 'unit test'
-          script: ''
+          script: 
             - npm run test
 
         — stage: test
           name: 'just test'
-          install: '' 
+          before_install: '' 
           script:
             - npm info vue
 
         - stage: build and push
           name: 'docker build'
-          install: 
+          before_install: ''
           script:
             - docker build -t weitengfei/frontend:latest .
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"

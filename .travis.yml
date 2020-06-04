@@ -8,9 +8,8 @@ services:
 
 stages: 
     - name: test
-      if: type = pull_request
     - name: build and push
-      if: branch = master
+      if: (branch = master) AND (type = push) AND (repo = Victor-H5/react-ci)
 
 jobs: 
     include:
@@ -27,7 +26,8 @@ jobs:
             - docker push weitengfei/react-ci:latest
 
         - name: 'deploy'
-          script: npm run build
+          script: 
+            - npm run build
           deploy: 
             provider: pages
             skip_cleanup: true

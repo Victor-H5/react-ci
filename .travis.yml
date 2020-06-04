@@ -16,18 +16,18 @@ stages:
 jobs: 
     include:
         - stage: test
-         name: 'unit test'
-         script: 
+          name: 'unit test'
+          script: 
             - npm run test
 
         - stage: build
-         name: 'docker build'
-         script:
+          name: 'docker build'
+          script:
             - docker build -t weitengfei/frontend:latest .
         
         - stage: push
-         name: 'docker push'
-         script:
+          name: 'docker push'
+          script:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
             - docker push weitengfei/frontend:latest
             

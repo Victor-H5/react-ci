@@ -1,11 +1,39 @@
 language: node_js
+
 node_js:
     - "10"
 services:
     - docker
 
-script:
-    - npm run test
-    - docker build -t weitengfei/frontend:latest .
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-    - docker push weitengfei/frontend:latest
+stages: 
+    - name: test
+    - name: build
+      if: branch = master
+    - name: push
+      if: branch = master
+
+jobs: 
+    include:
+        -stage: test
+         name: 'unit test'
+         script: 
+            - npm run test
+
+        -stage: build
+         name: 'docker build'
+         script:
+            - docker build -t weitengfei/frontend:latest .
+        
+        -stage: push
+         name: 'docker push'
+         script:
+            - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+            - docker push weitengfei/frontend:latest
+            
+        
+notifications: 
+    email:
+        recipients: 
+            - leon.wei@tradeshift.com
+        on_success: change
+        on_failure: always

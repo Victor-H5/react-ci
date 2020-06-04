@@ -8,9 +8,7 @@ services:
 
 stages: 
     - name: test
-    - name: build
-      if: branch = master
-    - name: push
+    - name: build and push
       if: branch = master
 
 jobs: 
@@ -20,17 +18,19 @@ jobs:
           script: 
             - npm run test
 
-        - stage: build
+        — stage: test
+          name: 'just test'
+          before_install: ~ 
+          script:
+            - npm info vue
+
+        - stage: build and push
           name: 'docker build'
+          before_install: ~ 
           script:
             - docker build -t weitengfei/frontend:latest .
-        
-        - stage: push
-          name: 'docker push'
-          script:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
             - docker push weitengfei/frontend:latest
-            
         
 notifications: 
     email:
@@ -38,3 +38,5 @@ notifications:
             - leon.wei@tradeshift.com
         on_success: change
         on_failure: always
+
+    webhook:

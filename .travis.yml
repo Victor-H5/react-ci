@@ -30,6 +30,7 @@ jobs:
             - docker push weitengfei/frontend:latest
 
         - name: 'deploy'
+          script: npm run build
           deploy: 
             provider: pages
             skip_cleanup: true
@@ -39,7 +40,7 @@ jobs:
             target_branch: master
             on:
                 branch: master
-                
+
 notifications: 
     email:
         recipients: 

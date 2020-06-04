@@ -18,7 +18,7 @@ jobs:
           script: 
             - npm run test
 
-        —name: 'just test'
+        — name: 'just test'
           script:
             - npm info vue
 

@@ -28,7 +28,18 @@ jobs:
             - docker build -t weitengfei/frontend:latest .
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
             - docker push weitengfei/frontend:latest
-        
+
+        - name: 'deploy'
+          deploy: 
+            provider: pages
+            skip_cleanup: true
+            github_token: $GITHUB_TOKEN
+            local_dir: build
+            repo: Victor-H5/Victor-H5.github.io
+            target_branch: master
+            on:
+                branch: master
+                
 notifications: 
     email:
         recipients: 
@@ -36,4 +47,6 @@ notifications:
         on_success: change
         on_failure: always
 
-    webhooks: http://118.89.225.49:7777
+    webhooks:
+        urls: http://118.89.225.49:7777
+        if: branch = master

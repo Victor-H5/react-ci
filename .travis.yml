@@ -15,12 +15,12 @@ jobs:
     include:
         - stage: test
           name: 'unit test'
-          script: 
+          script: ''
             - npm run test
 
         — stage: test
           name: 'just test'
-          install: 
+          install: '' 
           script:
             - npm info vue
 

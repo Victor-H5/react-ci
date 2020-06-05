@@ -18,7 +18,7 @@ function App() {
 
           Success
 
-          Test if config
+          Just for My server
       </header>
     </div>
   );

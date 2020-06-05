@@ -25,19 +25,6 @@ jobs:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
             - docker push weitengfei/react-ci:latest
 
-        - name: 'deploy'
-          script: 
-            - npm run build
-          deploy: 
-            provider: pages
-            skip_cleanup: true
-            github_token: $GITHUB_TOKEN
-            local_dir: build
-            repo: Victor-H5/Victor-H5.github.io
-            target_branch: master
-            on:
-                branch: master
-
 notifications: 
     email:
         recipients: 
